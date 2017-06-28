@@ -12,10 +12,6 @@ import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
 import javax.inject.Inject
 
 
-/**
- * Created by loop on 09/12/14.
- */
-
 class KotlinApplication : Application() {
 
     companion object {

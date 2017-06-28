@@ -2,7 +2,6 @@ package com.murs.ujjwal.kotlinsample
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-
 import android.location.LocationManager
 import android.util.Log
 import android.view.Menu
