@@ -22,37 +22,26 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample
+package com.murs.ujjwal.kotlinsample.di.module
+
+import android.app.Activity
+import com.murs.ujjwal.kotlinsample.ui.activity.MainActivity
+import com.murs.ujjwal.kotlinsample.di.component.MainSubComponent
+import dagger.Binds
+import dagger.Module
+import dagger.android.ActivityKey
+import dagger.android.AndroidInjector
+import dagger.multibindings.IntoMap
 
 /**
  * Created by Ujjwal on 28/06/17.
  */
 
-import android.app.Activity
-import android.app.Application
-import com.murs.ujjwal.kotlinsample.di.component.ApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.component.DaggerApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
+@Module(subcomponents = arrayOf(MainSubComponent::class))
+abstract class MainModule {
 
-
-class KotlinApplication : Application(), HasActivityInjector {
-
-    @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
-
-    lateinit var applicationComponent: ApplicationComponent
-
-    override fun onCreate() {
-        super.onCreate()
-
-        applicationComponent = DaggerApplicationComponent.builder().applicationModule(ApplicationModule(applicationContext)).build()
-
-        applicationComponent.inject(this)
-    }
-
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
-
+    @Binds
+    @IntoMap
+    @ActivityKey(MainActivity::class)
+    internal abstract fun bindMainActivityInjectorFactory(builder: MainSubComponent.Builder): AndroidInjector.Factory<out Activity>
 }

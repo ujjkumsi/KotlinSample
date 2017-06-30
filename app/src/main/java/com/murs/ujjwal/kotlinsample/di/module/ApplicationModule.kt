@@ -1,3 +1,27 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2017 Ujjwal Kumar Singh
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.murs.ujjwal.kotlinsample.di.module
 
 /**
@@ -5,49 +29,21 @@ package com.murs.ujjwal.kotlinsample.di.module
  */
 
 
-import android.app.Application
+import android.arch.persistence.room.Room
 import android.content.Context
-import android.location.LocationManager
-import com.murs.ujjwal.kotlinsample.di.scope.ForApplication
+import com.murs.ujjwal.kotlinsample.data.SampleDatabase
 import dagger.Module
 import dagger.Provides
-import javax.inject.Named
-import javax.inject.Singleton
 
 /**
  * A module for Android-specific dependencies which require a [android.content.Context] or [ ] to create.
  */
-@Module
-class ApplicationModule(private val application: Application) {
+@Module class ApplicationModule(private val context: Context) {
 
-    /**
-     * Allow the application context to be injected but require that it be annotated with [ ][ForApplication] to explicitly differentiate it from an activity context.
-     */
-    @Provides
-    @Singleton
-    @ForApplication
-    fun provideApplicationContext(): Context {
-        return application
-    }
+    @Provides fun providesAppContext() = context
 
-    @Provides
-    @Singleton
-    fun provideLocationManager(): LocationManager {
-        return application.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    }
+    @Provides fun providesSampleDatabase(context: Context): SampleDatabase =
+            Room.databaseBuilder(context, SampleDatabase::class.java, "my-todo-db").build()
 
-    @Provides
-    @Singleton
-    @Named("something")
-    fun provideSomething(): String {
-        return "something"
-    }
-
-    @Provides
-    @Singleton
-    @Named("somethingElse")
-    fun provideSomethingElse(): String {
-        return "somethingElse"
-    }
-
+    @Provides fun providesToDoDao(database: SampleDatabase) = database.taskDao()
 }

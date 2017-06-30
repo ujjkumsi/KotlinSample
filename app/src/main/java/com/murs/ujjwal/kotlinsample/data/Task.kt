@@ -22,37 +22,19 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample
+package com.murs.ujjwal.kotlinsample.data
 
 /**
  * Created by Ujjwal on 28/06/17.
  */
 
-import android.app.Activity
-import android.app.Application
-import com.murs.ujjwal.kotlinsample.di.component.ApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.component.DaggerApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-
-class KotlinApplication : Application(), HasActivityInjector {
-
-    @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
-
-    lateinit var applicationComponent: ApplicationComponent
-
-    override fun onCreate() {
-        super.onCreate()
-
-        applicationComponent = DaggerApplicationComponent.builder().applicationModule(ApplicationModule(applicationContext)).build()
-
-        applicationComponent.inject(this)
-    }
-
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
-
+@Entity(tableName = "task")
+data class Task(@ColumnInfo(name = "completed_flag") var completed: Boolean = false,
+                @ColumnInfo(name = "task_description") var description: String) {
+    @ColumnInfo(name = "id")
+    @PrimaryKey(autoGenerate = true) var id: Long = 0
 }

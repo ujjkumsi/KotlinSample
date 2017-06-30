@@ -22,37 +22,20 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample
+package com.murs.ujjwal.kotlinsample.mvp.view
+
+import com.murs.ujjwal.kotlinsample.data.Task
 
 /**
  * Created by Ujjwal on 28/06/17.
  */
 
-import android.app.Activity
-import android.app.Application
-import com.murs.ujjwal.kotlinsample.di.component.ApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.component.DaggerApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
 
+interface ToDoPresentation {
 
-class KotlinApplication : Application(), HasActivityInjector {
+    fun showTasks(tasks: List<Task>)
 
-    @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    fun taskAddedAt(position: Int)
 
-    lateinit var applicationComponent: ApplicationComponent
-
-    override fun onCreate() {
-        super.onCreate()
-
-        applicationComponent = DaggerApplicationComponent.builder().applicationModule(ApplicationModule(applicationContext)).build()
-
-        applicationComponent.inject(this)
-    }
-
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
-
+    fun scrollTo(position: Int)
 }

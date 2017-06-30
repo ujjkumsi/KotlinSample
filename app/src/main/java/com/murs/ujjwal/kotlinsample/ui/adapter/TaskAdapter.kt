@@ -22,37 +22,38 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample
+package com.murs.ujjwal.kotlinsample.ui.adapter
+
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import com.murs.ujjwal.kotlinsample.R
+import com.murs.ujjwal.kotlinsample.data.Task
 
 /**
  * Created by Ujjwal on 28/06/17.
  */
 
-import android.app.Activity
-import android.app.Application
-import com.murs.ujjwal.kotlinsample.di.component.ApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.component.DaggerApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
 
 
-class KotlinApplication : Application(), HasActivityInjector {
+class TaskAdapter(var tasks: List<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
-    @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
-
-    lateinit var applicationComponent: ApplicationComponent
-
-    override fun onCreate() {
-        super.onCreate()
-
-        applicationComponent = DaggerApplicationComponent.builder().applicationModule(ApplicationModule(applicationContext)).build()
-
-        applicationComponent.inject(this)
+    override fun onCreateViewHolder(parent: ViewGroup, type: Int): TaskViewHolder {
+        return TaskViewHolder(parent)
     }
 
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
+    override fun onBindViewHolder(viewHolder: TaskViewHolder, position: Int) {
+        viewHolder.bind(tasks[position])
+    }
 
+    override fun getItemCount(): Int = tasks.size
+
+    inner class TaskViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_todo, parent, false)) {
+
+        fun bind(task: Task) = with(itemView) {
+            val taskCb = findViewById(R.id.task_cb) as android.widget.CheckBox
+            taskCb.text = task.description
+            taskCb.isChecked = task.completed
+        }
+    }
 }

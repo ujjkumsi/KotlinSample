@@ -22,37 +22,31 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample
+package com.murs.ujjwal.kotlinsample.data
 
 /**
  * Created by Ujjwal on 28/06/17.
  */
 
-import android.app.Activity
-import android.app.Application
-import com.murs.ujjwal.kotlinsample.di.component.ApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.component.DaggerApplicationComponent
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
 
+import android.arch.persistence.room.*
+import android.arch.persistence.room.OnConflictStrategy.REPLACE
+import io.reactivex.Flowable
 
-class KotlinApplication : Application(), HasActivityInjector {
+@Dao interface TaskDao {
 
-    @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    @Query("select * from task")
+    fun getAllTasks(): Flowable<List<Task>>
 
-    lateinit var applicationComponent: ApplicationComponent
+    @Query("select * from task where id = :p0")
+    fun findTaskById(id: Long): Task
 
-    override fun onCreate() {
-        super.onCreate()
+    @Insert(onConflict = REPLACE)
+    fun insertTask(task: Task)
 
-        applicationComponent = DaggerApplicationComponent.builder().applicationModule(ApplicationModule(applicationContext)).build()
+    @Update(onConflict = REPLACE)
+    fun updateTask(task: Task)
 
-        applicationComponent.inject(this)
-    }
-
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
-
+    @Delete
+    fun deleteTask(task: Task)
 }

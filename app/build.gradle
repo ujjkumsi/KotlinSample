@@ -6,11 +6,6 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-ext {
-    supportLibVersion = '25.4.0'
-    archRoomVersion = '1.0.0-alpha3'
-    daggerVersion = '2.10'
-}
 
 android {
     compileSdkVersion 25
@@ -24,12 +19,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug {
-            minifyEnabled true
-            useProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),
-                    'proguard-rules.pro'
-        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
@@ -39,30 +28,35 @@ android {
 }
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation ('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$supportLibVersion"
-    testImplementation 'junit:junit:4.12'
-    compile 'io.reactivex:rxkotlin:0.60.0'
-
-    //Dagger dependencies
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    compile "com.google.dagger:dagger:$daggerVersion"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-
-    //Room dependencies
-    compile "android.arch.persistence.room:runtime:$archRoomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$archRoomVersion"
-    kapt "android.arch.persistence.room:compiler:$archRoomVersion"
-
 
     //Android basic dependencies
-    compile "com.android.support:appcompat-v7:$supportLibVersion"
-    compile "com.android.support:recyclerview-v7:$supportLibVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "com.android.support:appcompat-v7:$rootProject.versions.support_lib"
+    compile "com.android.support:cardview-v7:$rootProject.versions.support_lib"
+    compile "com.android.support:recyclerview-v7:$rootProject.versions.support_lib"
+    compile "com.android.support.constraint:constraint-layout:1.0.2"
 
+    //Dagger Dependencies
+    compile "com.google.dagger:dagger:$rootProject.versions.dagger"
+    compile "com.google.dagger:dagger-android:$rootProject.versions.dagger"
+    compile "com.google.dagger:dagger-android-support:$rootProject.versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.versions.dagger"
 
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    //Reactive Dependencies
+//    compile 'io.reactivex:rxkotlin:0.60.0'
+    compile "io.reactivex.rxjava2:rxjava:2.1.0"
+    compile "io.reactivex.rxjava2:rxandroid:2.0.1"
+
+    //Room Dependencies
+    compile "android.arch.persistence.room:runtime:$rootProject.versions.arch_comp"
+    compile "android.arch.persistence.room:rxjava2:$rootProject.versions.arch_comp"
+    kapt "android.arch.persistence.room:compiler:$rootProject.versions.arch_comp"
+
+    testCompile 'junit:junit:4.12'
 }
