@@ -22,20 +22,12 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.mvp.view
+package com.murs.ujjwal.kotlinsample.di.module
 
-import com.murs.ujjwal.kotlinsample.data.Task
+import com.murs.ujjwal.kotlinsample.ui.activity.MainActivity
+import dagger.Module
 
 /**
- * Created by Ujjwal on 28/06/17.
+ * Created by Ujjwal on 02/07/17.
  */
-
-
-interface MainPresentation {
-
-    fun showTasks(tasks: List<Task>)
-
-    fun taskAddedAt(position: Int)
-
-    fun scrollTo(position: Int)
-}
+@Module class MainImplModule(activity: MainActivity)

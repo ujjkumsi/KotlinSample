@@ -30,21 +30,21 @@ package com.murs.ujjwal.kotlinsample.mvp.presenter
 
 import com.murs.ujjwal.kotlinsample.data.Task
 import com.murs.ujjwal.kotlinsample.data.TaskDao
-import com.murs.ujjwal.kotlinsample.mvp.view.ToDoPresentation
+import com.murs.ujjwal.kotlinsample.mvp.view.MainPresentation
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ToDoPresenter @Inject constructor(val taskDao: TaskDao) {
+class MainPresenter @Inject constructor(val taskDao: TaskDao) {
 
     val compositeDisposable = CompositeDisposable()
     var tasks = ArrayList<Task>()
 
-    var presentation: ToDoPresentation? = null
+    var presentation: MainPresentation? = null
 
-    fun onCreate(toDoPresentation: ToDoPresentation) {
+    fun onCreate(toDoPresentation: MainPresentation) {
         presentation = toDoPresentation
         loadTasks()
     }

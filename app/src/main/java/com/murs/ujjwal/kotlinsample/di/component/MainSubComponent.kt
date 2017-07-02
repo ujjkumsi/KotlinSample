@@ -28,11 +28,19 @@ package com.murs.ujjwal.kotlinsample.di.component
  * Created by Ujjwal on 28/06/17.
  */
 
+import com.murs.ujjwal.kotlinsample.data.SampleDatabase
+import com.murs.ujjwal.kotlinsample.di.module.MainImplModule
 import com.murs.ujjwal.kotlinsample.ui.activity.MainActivity
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
-@Subcomponent interface MainSubComponent : AndroidInjector<MainActivity> {
+@Subcomponent(modules = arrayOf(MainImplModule::class))
+interface MainSubComponent : AndroidInjector<MainActivity> {
+    @Subcomponent.Builder abstract class Builder : AndroidInjector.Builder<MainActivity>(){
+        internal abstract fun mainImplModule(module: MainImplModule): Builder
 
-    @Subcomponent.Builder abstract class Builder : AndroidInjector.Builder<MainActivity>()
+        override fun seedInstance(activity: MainActivity) {
+            mainImplModule(MainImplModule(activity))
+        }
+    }
 }

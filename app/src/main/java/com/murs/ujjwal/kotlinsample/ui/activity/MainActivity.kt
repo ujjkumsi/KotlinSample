@@ -29,16 +29,16 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.murs.ujjwal.kotlinsample.R
 import com.murs.ujjwal.kotlinsample.data.Task
+import com.murs.ujjwal.kotlinsample.mvp.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import com.murs.ujjwal.kotlinsample.ui.adapter.TaskAdapter
-import com.murs.ujjwal.kotlinsample.mvp.view.ToDoPresentation
-import com.murs.ujjwal.kotlinsample.mvp.presenter.ToDoPresenter
+import com.murs.ujjwal.kotlinsample.mvp.view.MainPresentation
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), ToDoPresentation {
+class MainActivity : AppCompatActivity(), MainPresentation {
 
-    @Inject lateinit var presenter: ToDoPresenter
+    @Inject lateinit var presenter: MainPresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
