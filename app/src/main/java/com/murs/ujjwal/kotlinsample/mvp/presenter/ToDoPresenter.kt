@@ -28,8 +28,8 @@ package com.murs.ujjwal.kotlinsample.mvp.presenter
  * Created by Ujjwal on 28/06/17.
  */
 
-import com.murs.ujjwal.kotlinsample.data.Task
-import com.murs.ujjwal.kotlinsample.data.TaskDao
+import com.murs.ujjwal.kotlinsample.data.entity.Task
+import com.murs.ujjwal.kotlinsample.data.dao.TaskDao
 import com.murs.ujjwal.kotlinsample.mvp.view.ToDoPresentation
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

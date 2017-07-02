@@ -22,23 +22,31 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.di.component
+package com.murs.ujjwal.kotlinsample.data.dao
 
 /**
  * Created by Ujjwal on 28/06/17.
  */
 
 
+import android.arch.persistence.room.*
+import android.arch.persistence.room.OnConflictStrategy.REPLACE
+import com.murs.ujjwal.kotlinsample.data.entity.Task
 
-import com.murs.ujjwal.kotlinsample.KotlinApplication
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import com.murs.ujjwal.kotlinsample.di.module.MainModule
-import com.murs.ujjwal.kotlinsample.di.module.NewsModule
-import dagger.Component
-import javax.inject.Singleton
+@Dao interface TaskDao {
 
-@Singleton
-@Component(modules = arrayOf(ApplicationModule::class, MainModule::class))
-interface ApplicationComponent {
-    fun inject(application: KotlinApplication)
+    @Query("select * from task")
+    fun getAllTasks(): io.reactivex.Flowable<List<Task>>
+
+    @Query("select * from task where id = :p0")
+    fun findTaskById(id: Long): Task
+
+    @Insert(onConflict = REPLACE)
+    fun insertTask(task: Task)
+
+    @Update(onConflict = REPLACE)
+    fun updateTask(task: Task)
+
+    @Delete
+    fun deleteTask(task: Task)
 }

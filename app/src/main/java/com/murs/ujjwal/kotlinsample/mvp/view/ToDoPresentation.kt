@@ -22,23 +22,19 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.di.component
+package com.murs.ujjwal.kotlinsample.mvp.view
+import com.murs.ujjwal.kotlinsample.data.entity.Task
 
 /**
  * Created by Ujjwal on 28/06/17.
  */
 
 
+interface ToDoPresentation {
 
-import com.murs.ujjwal.kotlinsample.KotlinApplication
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import com.murs.ujjwal.kotlinsample.di.module.MainModule
-import com.murs.ujjwal.kotlinsample.di.module.NewsModule
-import dagger.Component
-import javax.inject.Singleton
+    fun showTasks(tasks: List<Task>)
 
-@Singleton
-@Component(modules = arrayOf(ApplicationModule::class, MainModule::class))
-interface ApplicationComponent {
-    fun inject(application: KotlinApplication)
+    fun taskAddedAt(position: Int)
+
+    fun scrollTo(position: Int)
 }

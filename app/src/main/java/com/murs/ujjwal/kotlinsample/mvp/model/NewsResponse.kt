@@ -22,23 +22,25 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.di.component
+package com.murs.ujjwal.kotlinsample.mvp.model
+
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import com.murs.ujjwal.kotlinsample.data.entity.News
+
 
 /**
- * Created by Ujjwal on 28/06/17.
+ * Created by Ujjwal on 02/07/17.
  */
 
+class NewsResponse {
 
+    @SerializedName("Pagination")
+    @Expose
+    var pagination: Pagination? = null
 
-import com.murs.ujjwal.kotlinsample.KotlinApplication
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import com.murs.ujjwal.kotlinsample.di.module.MainModule
-import com.murs.ujjwal.kotlinsample.di.module.NewsModule
-import dagger.Component
-import javax.inject.Singleton
+    @SerializedName("NewsItem")
+    @Expose
+    var newsItem: List<News> = ArrayList<News>()
 
-@Singleton
-@Component(modules = arrayOf(ApplicationModule::class, MainModule::class))
-interface ApplicationComponent {
-    fun inject(application: KotlinApplication)
 }

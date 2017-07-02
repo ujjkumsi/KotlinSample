@@ -28,7 +28,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.murs.ujjwal.kotlinsample.R
-import com.murs.ujjwal.kotlinsample.data.Task
+import com.murs.ujjwal.kotlinsample.data.entity.Task
 
 /**
  * Created by Ujjwal on 28/06/17.

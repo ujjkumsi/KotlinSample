@@ -22,23 +22,40 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.di.component
+package com.murs.ujjwal.kotlinsample.mvp.presenter
+
+import com.murs.ujjwal.kotlinsample.data.dao.NewsDao
+import com.murs.ujjwal.kotlinsample.di.api.NewsApiInterface
+import com.murs.ujjwal.kotlinsample.mvp.view.NewsPresentation
+import com.murs.ujjwal.kotlinsample.mvp.view.ToDoPresentation
+import rx.Subscription
+import javax.inject.Inject
 
 /**
- * Created by Ujjwal on 28/06/17.
+ * Created by Ujjwal on 02/07/17.
  */
 
+class NewsPresenter{
 
+    private var mNewsApiInterface: NewsApiInterface? = null
+    private var mNewsView: NewsPresentation? = null
 
-import com.murs.ujjwal.kotlinsample.KotlinApplication
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import com.murs.ujjwal.kotlinsample.di.module.MainModule
-import com.murs.ujjwal.kotlinsample.di.module.NewsModule
-import dagger.Component
-import javax.inject.Singleton
+    private var subscription: Subscription? = null
 
-@Singleton
-@Component(modules = arrayOf(ApplicationModule::class, MainModule::class))
-interface ApplicationComponent {
-    fun inject(application: KotlinApplication)
+    fun onViewCreated(view: NewsPresentation) {
+        mNewsView = view
+    }
+
+    fun setNewsApiInterface(newsApiInterface: NewsApiInterface) {
+        this.mNewsApiInterface = newsApiInterface
+    }
+
+    fun loadNews() {
+
+    }
+
+    fun onDestroy() {
+        subscription?.unsubscribe()
+    }
+
 }

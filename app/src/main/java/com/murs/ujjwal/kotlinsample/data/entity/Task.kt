@@ -22,31 +22,19 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.data
+package com.murs.ujjwal.kotlinsample.data.entity
 
 /**
  * Created by Ujjwal on 28/06/17.
  */
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-import android.arch.persistence.room.*
-import android.arch.persistence.room.OnConflictStrategy.REPLACE
-import io.reactivex.Flowable
-
-@Dao interface TaskDao {
-
-    @Query("select * from task")
-    fun getAllTasks(): Flowable<List<Task>>
-
-    @Query("select * from task where id = :p0")
-    fun findTaskById(id: Long): Task
-
-    @Insert(onConflict = REPLACE)
-    fun insertTask(task: Task)
-
-    @Update(onConflict = REPLACE)
-    fun updateTask(task: Task)
-
-    @Delete
-    fun deleteTask(task: Task)
+@Entity(tableName = "task")
+data class Task(@ColumnInfo(name = "completed_flag") var completed: Boolean = false,
+                @ColumnInfo(name = "task_description") var description: String) {
+    @ColumnInfo(name = "id")
+    @PrimaryKey(autoGenerate = true) var id: Long = 0
 }

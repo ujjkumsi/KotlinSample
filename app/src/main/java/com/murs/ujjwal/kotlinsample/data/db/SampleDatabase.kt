@@ -22,23 +22,21 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.di.component
+package com.murs.ujjwal.kotlinsample.data.db
 
 /**
  * Created by Ujjwal on 28/06/17.
  */
 
+import android.arch.persistence.room.Database
+import android.arch.persistence.room.RoomDatabase
+import com.murs.ujjwal.kotlinsample.data.dao.NewsDao
+import com.murs.ujjwal.kotlinsample.data.entity.Task
+import com.murs.ujjwal.kotlinsample.data.dao.TaskDao
+import com.murs.ujjwal.kotlinsample.data.entity.News
 
-
-import com.murs.ujjwal.kotlinsample.KotlinApplication
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import com.murs.ujjwal.kotlinsample.di.module.MainModule
-import com.murs.ujjwal.kotlinsample.di.module.NewsModule
-import dagger.Component
-import javax.inject.Singleton
-
-@Singleton
-@Component(modules = arrayOf(ApplicationModule::class, MainModule::class))
-interface ApplicationComponent {
-    fun inject(application: KotlinApplication)
+@Database(entities = arrayOf(Task::class, News::class), version = 1)
+abstract class SampleDatabase : RoomDatabase() {
+    abstract fun taskDao(): TaskDao
+//    abstract fun newsDao(): NewsDao
 }

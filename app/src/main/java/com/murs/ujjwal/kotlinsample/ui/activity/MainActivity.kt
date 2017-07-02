@@ -28,7 +28,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.murs.ujjwal.kotlinsample.R
-import com.murs.ujjwal.kotlinsample.data.Task
+import com.murs.ujjwal.kotlinsample.data.entity.Task
 import kotlinx.android.synthetic.main.activity_main.*
 import com.murs.ujjwal.kotlinsample.ui.adapter.TaskAdapter
 import com.murs.ujjwal.kotlinsample.mvp.view.ToDoPresentation

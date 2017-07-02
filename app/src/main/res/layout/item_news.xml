@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ MIT License
+  ~
+  ~ Copyright (c) 2017 Ujjwal Kumar Singh
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="@dimen/view_news_item_corner_radius"
+    app:contentPadding="@dimen/view_news_item_content_padding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="@dimen/view_news_item_image_view_side_size"
+        android:layout_height="@dimen/view_news_item_image_view_side_size"/>
+
+    <LinearLayout
+        android:layout_marginLeft="@dimen/view_item_content_left_padding"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            tools:text="text"
+            android:textStyle="bold"
+            style="@style/NewsItemContentStyle"
+            android:textSize="@dimen/view_news_item_head_line_text_size"
+            android:textColor="@android:color/primary_text_light"
+            android:maxLines="2"
+            android:id="@+id/tvHeadline" />
+
+        <TextView
+            tools:text="text"
+            android:maxLines="3"
+            style="@style/NewsItemContentStyle"
+            android:id="@+id/tvCaption"/>
+
+        <TextView
+            tools:text="text"
+            style="@style/NewsItemContentStyle"
+            android:id="@+id/tvAgency"/>
+
+        <TextView
+            tools:text="text"
+            style="@style/NewsItemContentStyle"
+            android:id="@+id/tvDate"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

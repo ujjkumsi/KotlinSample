@@ -31,9 +31,16 @@ package com.murs.ujjwal.kotlinsample.di.module
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import com.murs.ujjwal.kotlinsample.data.SampleDatabase
+import com.murs.ujjwal.kotlinsample.data.db.SampleDatabase
+import com.murs.ujjwal.kotlinsample.di.api.NewsApiInterface
+import com.murs.ujjwal.kotlinsample.util.Constants
 import dagger.Module
 import dagger.Provides
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import rx.schedulers.Schedulers
+import javax.inject.Singleton
 
 /**
  * A module for Android-specific dependencies which require a [android.content.Context] or [ ] to create.
@@ -46,4 +53,15 @@ import dagger.Provides
             Room.databaseBuilder(context, SampleDatabase::class.java, "my-todo-db").build()
 
     @Provides fun providesToDoDao(database: SampleDatabase) = database.taskDao()
+
+//    @Provides fun providesNewsDao(database: SampleDatabase) = database.newsDao()
+
+    @Provides fun provideNewApiInterface(): NewsApiInterface {
+        val retrofit = Retrofit.Builder()
+                .baseUrl(Constants.NEWS_ENDPOINT)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+                .build()
+        return retrofit.create(NewsApiInterface::class.java)
+    }
 }

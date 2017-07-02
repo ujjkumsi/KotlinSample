@@ -36,6 +36,8 @@ ext {
     versions = [
             support_lib: '25.4.0',
             dagger     : '2.11',
-            arch_comp  : '1.0.0-alpha3'
+            arch_comp  : '1.0.0-alpha3',
+            retrofit   : '2.3.0',
+            glide      : '4.0.0-RC1'
     ]
 }

@@ -22,19 +22,23 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.data
+package com.murs.ujjwal.kotlinsample.mvp.view
+
+import com.murs.ujjwal.kotlinsample.data.entity.News
 
 /**
- * Created by Ujjwal on 28/06/17.
+ * Created by Ujjwal on 02/07/17.
  */
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
 
-@Entity(tableName = "task")
-data class Task(@ColumnInfo(name = "completed_flag") var completed: Boolean = false,
-                @ColumnInfo(name = "task_description") var description: String) {
-    @ColumnInfo(name = "id")
-    @PrimaryKey(autoGenerate = true) var id: Long = 0
+interface NewsPresentation {
+
+    fun onNewsItemLoaded(newsItems: List<News>)
+
+    fun onError(throwable: Throwable?)
+
+    fun hideLoading()
+
+    fun showLoading()
+
 }

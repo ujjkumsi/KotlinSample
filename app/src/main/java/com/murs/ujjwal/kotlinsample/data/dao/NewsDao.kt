@@ -22,23 +22,29 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.di.component
+package com.murs.ujjwal.kotlinsample.data.dao
+
+import android.arch.persistence.room.*
+import com.murs.ujjwal.kotlinsample.data.entity.News
 
 /**
- * Created by Ujjwal on 28/06/17.
+ * Created by Ujjwal on 02/07/17.
  */
 
+@Dao interface NewsDao {
 
-
-import com.murs.ujjwal.kotlinsample.KotlinApplication
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import com.murs.ujjwal.kotlinsample.di.module.MainModule
-import com.murs.ujjwal.kotlinsample.di.module.NewsModule
-import dagger.Component
-import javax.inject.Singleton
-
-@Singleton
-@Component(modules = arrayOf(ApplicationModule::class, MainModule::class))
-interface ApplicationComponent {
-    fun inject(application: KotlinApplication)
+//    @Query("select * from news")
+//    fun getAllNews(): List<News>
+//
+//    @Query("select * from news where newsItemId = :p0")
+//    fun findNewsById(id: Long): News
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun insertNews(news: News)
+//
+//    @Update(onConflict = OnConflictStrategy.REPLACE)
+//    fun updateNews(news: News)
+//
+//    @Delete
+//    fun deleteNews(news: News)
 }

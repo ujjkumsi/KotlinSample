@@ -22,23 +22,26 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.di.component
+package com.murs.ujjwal.kotlinsample.di.module
+
+import android.app.Activity
+import com.murs.ujjwal.kotlinsample.ui.activity.NewsActivity
+import dagger.Binds
+import dagger.Module
+import dagger.android.ActivityKey
+import dagger.android.AndroidInjector
+import dagger.multibindings.IntoMap
 
 /**
- * Created by Ujjwal on 28/06/17.
+ * Created by Ujjwal on 02/07/17.
  */
 
+@Module(subcomponents = arrayOf(NewsSubComponent::class))
+abstract class NewsModule {
 
+    @Binds
+    @IntoMap
+    @ActivityKey(NewsActivity::class)
+    internal abstract fun bindNewsActivityInjectorFactory(builder: NewsSubComponent.Builder): AndroidInjector.Factory<out Activity>
 
-import com.murs.ujjwal.kotlinsample.KotlinApplication
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import com.murs.ujjwal.kotlinsample.di.module.MainModule
-import com.murs.ujjwal.kotlinsample.di.module.NewsModule
-import dagger.Component
-import javax.inject.Singleton
-
-@Singleton
-@Component(modules = arrayOf(ApplicationModule::class, MainModule::class))
-interface ApplicationComponent {
-    fun inject(application: KotlinApplication)
 }

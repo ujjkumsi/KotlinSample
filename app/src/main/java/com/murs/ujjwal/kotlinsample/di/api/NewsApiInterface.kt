@@ -22,16 +22,20 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.data
+package com.murs.ujjwal.kotlinsample.di.api
 
 /**
- * Created by Ujjwal on 28/06/17.
+ * Created by Ujjwal on 02/07/17.
  */
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
 
-@Database(entities = arrayOf(Task::class), version = 1)
-abstract class SampleDatabase : RoomDatabase() {
-    abstract fun taskDao(): TaskDao
+import com.murs.ujjwal.kotlinsample.mvp.model.NewsResponse
+import retrofit2.http.GET
+import rx.Observable
+
+interface NewsApiInterface {
+
+    @GET("/feeds/newsdefaultfeeds.cms?feedtype=sjson")
+    fun getNews(): Observable<NewsResponse>
+
 }

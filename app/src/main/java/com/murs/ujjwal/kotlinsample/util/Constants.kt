@@ -22,20 +22,19 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.mvp.view
-
-import com.murs.ujjwal.kotlinsample.data.Task
+package com.murs.ujjwal.kotlinsample.util
 
 /**
- * Created by Ujjwal on 28/06/17.
+ * Created by Ujjwal on 02/07/17.
  */
 
+class Constants {
 
-interface ToDoPresentation {
+    companion object {
 
-    fun showTasks(tasks: List<Task>)
-
-    fun taskAddedAt(position: Int)
-
-    fun scrollTo(position: Int)
+        val NEWS_ENDPOINT = "http://timesofindia.indiatimes.com/"
+        val DATE_PATTERN = "MMM dd, yyyy, hh.mma"
+        val IST_TIME_ZONE = "IST"
+        val LEADING_ZERO_TEMPLATE = "%02d"
+    }
 }
