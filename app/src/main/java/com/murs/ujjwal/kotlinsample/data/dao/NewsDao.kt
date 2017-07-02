@@ -33,18 +33,18 @@ import com.murs.ujjwal.kotlinsample.data.entity.News
 
 @Dao interface NewsDao {
 
-//    @Query("select * from news")
-//    fun getAllNews(): List<News>
-//
-//    @Query("select * from news where newsItemId = :p0")
-//    fun findNewsById(id: Long): News
-//
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    fun insertNews(news: News)
-//
-//    @Update(onConflict = OnConflictStrategy.REPLACE)
-//    fun updateNews(news: News)
-//
-//    @Delete
-//    fun deleteNews(news: News)
+    @Query("select * from news")
+    fun getAllNews(): List<News>
+
+    @Query("select * from news where newsItemId = :p0")
+    fun findNewsById(id: Long): News
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertNews(news: News)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateNews(news: News)
+
+    @Delete
+    fun deleteNews(news: News)
 }

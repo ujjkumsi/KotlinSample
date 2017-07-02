@@ -24,25 +24,32 @@
 
 package com.murs.ujjwal.kotlinsample.di.module
 
-import android.app.Activity
-import com.murs.ujjwal.kotlinsample.di.component.NewsSubComponent
+import android.content.Context
+import com.murs.ujjwal.kotlinsample.di.api.NewsApiInterface
+import com.murs.ujjwal.kotlinsample.ui.activity.MainActivity
 import com.murs.ujjwal.kotlinsample.ui.activity.NewsActivity
-import dagger.Binds
+import com.murs.ujjwal.kotlinsample.util.Constants
 import dagger.Module
-import dagger.android.ActivityKey
-import dagger.android.AndroidInjector
-import dagger.multibindings.IntoMap
+import dagger.Provides
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import rx.schedulers.Schedulers
 
 /**
  * Created by Ujjwal on 02/07/17.
  */
 
-@Module(subcomponents = arrayOf(NewsSubComponent::class))
-abstract class NewsModule {
+@Module class NewsImplModule(private val activity : NewsActivity){
 
-    @Binds
-    @IntoMap
-    @ActivityKey(NewsActivity::class)
-    internal abstract fun bindNewsActivityInjectorFactory(builder: NewsSubComponent.Builder): AndroidInjector.Factory<out Activity>
+    @Provides fun provideActivity(): NewsActivity = activity
 
+    @Provides fun provideNewApiInterface(): NewsApiInterface {
+        val retrofit = Retrofit.Builder()
+                .baseUrl(Constants.NEWS_ENDPOINT)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+                .build()
+        return retrofit.create(NewsApiInterface::class.java)
+    }
 }

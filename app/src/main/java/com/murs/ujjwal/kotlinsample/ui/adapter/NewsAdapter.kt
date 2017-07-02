@@ -29,8 +29,6 @@ package com.murs.ujjwal.kotlinsample.ui.adapter
  */
 
 
-import android.graphics.Bitmap
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
 import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
@@ -38,9 +36,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.murs.ujjwal.kotlinsample.R
 import com.murs.ujjwal.kotlinsample.data.entity.News
 import com.murs.ujjwal.kotlinsample.util.DateUtil

@@ -54,14 +54,5 @@ import javax.inject.Singleton
 
     @Provides fun providesToDoDao(database: SampleDatabase) = database.taskDao()
 
-//    @Provides fun providesNewsDao(database: SampleDatabase) = database.newsDao()
-
-    @Provides fun provideNewApiInterface(): NewsApiInterface {
-        val retrofit = Retrofit.Builder()
-                .baseUrl(Constants.NEWS_ENDPOINT)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
-                .build()
-        return retrofit.create(NewsApiInterface::class.java)
-    }
+    @Provides fun providesNewsDao(database: SampleDatabase) = database.newsDao()
 }

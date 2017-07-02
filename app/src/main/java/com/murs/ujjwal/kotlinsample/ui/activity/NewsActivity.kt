@@ -46,76 +46,77 @@ import javax.inject.Inject
  */
 
 
-class NewsActivity: AppCompatActivity() {
+class NewsActivity: AppCompatActivity(), NewsPresentation, SwipeRefreshLayout.OnRefreshListener {
 
 
-//    @Inject
-//    lateinit var mNewsPresenter: NewsPresenter
-//    @Inject
-//    lateinit var mNewsAPI: NewsApiInterface
-//
-//    private val mNewsAdapter = NewsAdapter()
+    @Inject
+    lateinit var mNewsPresenter: NewsPresenter
+
+    @Inject
+    lateinit var mNewsAPI: NewsApiInterface
+
+    private val mNewsAdapter = NewsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        AndroidInjection.inject(this)
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-//        setSupportActionBar(toolbar)
-//        prepareSwipeRefreshLayout()
-//        prepareRecyclerView()
-//        rvNews.adapter = mNewsAdapter
-//        mNewsPresenter.setNewsApiInterface(mNewsAPI)
-//        mNewsPresenter.onViewCreated(this)
-//        mNewsPresenter.loadNews()
+        setContentView(R.layout.activity_news)
+        setSupportActionBar(toolbar)
+        prepareSwipeRefreshLayout()
+        prepareRecyclerView()
+        rvNews.adapter = mNewsAdapter
+        mNewsPresenter.setNewsApiInterface(mNewsAPI)
+        mNewsPresenter.onViewCreated(this)
+        mNewsPresenter.loadNews()
     }
 
-//    private fun prepareSwipeRefreshLayout() {
-//        slView.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW)
-//        slView.setOnRefreshListener(this)
-//    }
-//
-//    private fun prepareRecyclerView() {
-//        val layoutManager = LinearLayoutManager(this)
-//        rvNews.layoutManager = layoutManager
-//        rvNews.setHasFixedSize(true)
-//    }
-//
-//    override fun onNewsItemLoaded(newsItems: List<News>) {
-//        slView.isRefreshing = false
-//        slView.visibility = View.GONE
-//        if(newsItems.isEmpty()) {
-//            tvStatus.setText(R.string.list_is_empty)
-//            return
-//        }
-//        tvStatus.text = null
-//        mNewsAdapter.setDataSource(newsItems)
-//    }
-//
-//    override fun onError(throwable: Throwable?) {
-//        slView.isRefreshing = false
-//        pbProgress.visibility = View.GONE
-//        if (throwable is IOException) {
-//            tvStatus.setText(R.string.connection_error)
-//        } else {
-//            tvStatus.setText(R.string.list_is_empty)
-//        }
-//    }
-//
-//    override fun showLoading() {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//
-//    override fun hideLoading() {
-//        slView.isRefreshing = false
-//        slView.visibility = View.GONE
-//    }
-//
-//    override fun onRefresh() {
-//        mNewsPresenter.loadNews()
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        mNewsPresenter.onDestroy()
-//    }
+    private fun prepareSwipeRefreshLayout() {
+        slView.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW)
+        slView.setOnRefreshListener(this)
+    }
+
+    private fun prepareRecyclerView() {
+        val layoutManager = LinearLayoutManager(this)
+        rvNews.layoutManager = layoutManager
+        rvNews.setHasFixedSize(true)
+    }
+
+    override fun onNewsItemLoaded(newsItems: List<News>) {
+        slView.isRefreshing = false
+        slView.visibility = View.GONE
+        if(newsItems.isEmpty()) {
+            tvStatus.setText(R.string.list_is_empty)
+            return
+        }
+        tvStatus.text = null
+        mNewsAdapter.setDataSource(newsItems)
+    }
+
+    override fun onError(throwable: Throwable?) {
+        slView.isRefreshing = false
+        pbProgress.visibility = View.GONE
+        if (throwable is IOException) {
+            tvStatus.setText(R.string.connection_error)
+        } else {
+            tvStatus.setText(R.string.list_is_empty)
+        }
+    }
+
+    override fun showLoading() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoading() {
+        slView.isRefreshing = false
+        slView.visibility = View.GONE
+    }
+
+    override fun onRefresh() {
+        mNewsPresenter.loadNews()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mNewsPresenter.onDestroy()
+    }
 }

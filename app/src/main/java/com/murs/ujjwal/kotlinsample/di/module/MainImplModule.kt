@@ -24,25 +24,14 @@
 
 package com.murs.ujjwal.kotlinsample.di.module
 
-import android.app.Activity
-import com.murs.ujjwal.kotlinsample.di.component.NewsSubComponent
-import com.murs.ujjwal.kotlinsample.ui.activity.NewsActivity
-import dagger.Binds
+import com.murs.ujjwal.kotlinsample.ui.activity.MainActivity
 import dagger.Module
-import dagger.android.ActivityKey
-import dagger.android.AndroidInjector
-import dagger.multibindings.IntoMap
+import dagger.Provides
 
 /**
  * Created by Ujjwal on 02/07/17.
  */
+@Module class MainImplModule(private val activity: MainActivity){
 
-@Module(subcomponents = arrayOf(NewsSubComponent::class))
-abstract class NewsModule {
-
-    @Binds
-    @IntoMap
-    @ActivityKey(NewsActivity::class)
-    internal abstract fun bindNewsActivityInjectorFactory(builder: NewsSubComponent.Builder): AndroidInjector.Factory<out Activity>
-
+    @Provides fun provideActivity(): MainActivity = activity
 }

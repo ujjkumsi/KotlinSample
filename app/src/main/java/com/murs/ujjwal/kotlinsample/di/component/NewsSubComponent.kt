@@ -22,27 +22,27 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.di.module
+package com.murs.ujjwal.kotlinsample.di.component
 
-import android.app.Activity
-import com.murs.ujjwal.kotlinsample.di.component.NewsSubComponent
+import com.murs.ujjwal.kotlinsample.data.entity.News
+import com.murs.ujjwal.kotlinsample.di.module.MainImplModule
+import com.murs.ujjwal.kotlinsample.di.module.NewsImplModule
+import com.murs.ujjwal.kotlinsample.ui.activity.MainActivity
 import com.murs.ujjwal.kotlinsample.ui.activity.NewsActivity
-import dagger.Binds
-import dagger.Module
-import dagger.android.ActivityKey
+import dagger.Subcomponent
 import dagger.android.AndroidInjector
-import dagger.multibindings.IntoMap
 
 /**
  * Created by Ujjwal on 02/07/17.
  */
+@Subcomponent(modules = arrayOf(NewsImplModule::class))
+interface NewsSubComponent : AndroidInjector<NewsActivity> {
 
-@Module(subcomponents = arrayOf(NewsSubComponent::class))
-abstract class NewsModule {
+    @Subcomponent.Builder abstract class Builder : AndroidInjector.Builder<NewsActivity>(){
+        internal abstract fun newsImplModule(module: NewsImplModule): Builder
 
-    @Binds
-    @IntoMap
-    @ActivityKey(NewsActivity::class)
-    internal abstract fun bindNewsActivityInjectorFactory(builder: NewsSubComponent.Builder): AndroidInjector.Factory<out Activity>
-
+        override fun seedInstance(activity: NewsActivity) {
+            newsImplModule(NewsImplModule(activity))
+        }
+    }
 }

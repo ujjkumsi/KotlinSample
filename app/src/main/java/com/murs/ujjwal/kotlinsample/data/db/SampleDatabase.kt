@@ -38,5 +38,5 @@ import com.murs.ujjwal.kotlinsample.data.entity.News
 @Database(entities = arrayOf(Task::class, News::class), version = 1)
 abstract class SampleDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
-//    abstract fun newsDao(): NewsDao
+    abstract fun newsDao(): NewsDao
 }
