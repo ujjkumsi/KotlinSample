@@ -24,23 +24,24 @@
 
 package com.murs.ujjwal.kotlinsample.mvp.presenter
 
+import android.util.Log
+import com.google.gson.JsonObject
 import com.murs.ujjwal.kotlinsample.data.dao.NewsDao
 import com.murs.ujjwal.kotlinsample.di.api.NewsApiInterface
 import com.murs.ujjwal.kotlinsample.mvp.view.NewsPresentation
-import com.murs.ujjwal.kotlinsample.mvp.view.ToDoPresentation
-import rx.Subscription
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
  * Created by Ujjwal on 02/07/17.
  */
 
-class NewsPresenter{
+class NewsPresenter @Inject constructor(val newsDao: NewsDao){
+
 
     private var mNewsApiInterface: NewsApiInterface? = null
     private var mNewsView: NewsPresentation? = null
-
-    private var subscription: Subscription? = null
 
     fun onViewCreated(view: NewsPresentation) {
         mNewsView = view
@@ -51,11 +52,21 @@ class NewsPresenter{
     }
 
     fun loadNews() {
-
+        mNewsApiInterface!!
+                .getNews()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            Log.d("Check", it.toString())
+                        },
+                        { error ->
+                            Log.e("Error", error.message)
+                        }
+                )
     }
 
     fun onDestroy() {
-        subscription?.unsubscribe()
     }
 
 }

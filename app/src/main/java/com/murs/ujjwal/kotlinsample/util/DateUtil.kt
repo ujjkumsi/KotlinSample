@@ -28,8 +28,6 @@ package com.murs.ujjwal.kotlinsample.util
  * Created by Ujjwal on 02/07/17.
  */
 
-
-
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

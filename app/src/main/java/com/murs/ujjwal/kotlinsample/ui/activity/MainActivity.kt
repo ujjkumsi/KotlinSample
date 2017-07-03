@@ -24,6 +24,7 @@
 
 package com.murs.ujjwal.kotlinsample.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -31,14 +32,14 @@ import com.murs.ujjwal.kotlinsample.R
 import com.murs.ujjwal.kotlinsample.data.entity.Task
 import kotlinx.android.synthetic.main.activity_main.*
 import com.murs.ujjwal.kotlinsample.ui.adapter.TaskAdapter
-import com.murs.ujjwal.kotlinsample.mvp.view.ToDoPresentation
-import com.murs.ujjwal.kotlinsample.mvp.presenter.ToDoPresenter
+import com.murs.ujjwal.kotlinsample.mvp.view.MainPresentation
+import com.murs.ujjwal.kotlinsample.mvp.presenter.MainPresenter
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), ToDoPresentation {
+class MainActivity : AppCompatActivity(), MainPresentation {
 
-    @Inject lateinit var presenter: ToDoPresenter
+    @Inject lateinit var presenter: MainPresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +50,8 @@ class MainActivity : AppCompatActivity(), ToDoPresentation {
         rvTasks?.adapter = TaskAdapter(emptyList())
 
         btnAdd?.setOnClickListener({ presenter.addNewTask(etTask?.text.toString()) })
-
+        btnNews?.setOnClickListener({val intent = Intent(this, NewsActivity::class.java)
+            startActivity(intent)})
         presenter.onCreate(this)
     }
 

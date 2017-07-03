@@ -23,11 +23,7 @@
  */
 
 package com.murs.ujjwal.kotlinsample.di.component
-
-import com.murs.ujjwal.kotlinsample.data.entity.News
-import com.murs.ujjwal.kotlinsample.di.module.MainImplModule
 import com.murs.ujjwal.kotlinsample.di.module.NewsImplModule
-import com.murs.ujjwal.kotlinsample.ui.activity.MainActivity
 import com.murs.ujjwal.kotlinsample.ui.activity.NewsActivity
 import dagger.Subcomponent
 import dagger.android.AndroidInjector

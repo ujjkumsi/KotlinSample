@@ -30,7 +30,7 @@ import com.murs.ujjwal.kotlinsample.data.entity.Task
  */
 
 
-interface ToDoPresentation {
+interface MainPresentation {
 
     fun showTasks(tasks: List<Task>)
 

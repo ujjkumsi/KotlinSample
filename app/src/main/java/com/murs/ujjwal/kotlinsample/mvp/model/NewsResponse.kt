@@ -26,6 +26,7 @@ package com.murs.ujjwal.kotlinsample.mvp.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.ktoi.toi.model.Pagination
 import com.murs.ujjwal.kotlinsample.data.entity.News
 
 

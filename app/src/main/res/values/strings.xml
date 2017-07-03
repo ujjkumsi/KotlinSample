@@ -9,5 +9,6 @@
     <string name="view_news_item_agency">Agency: %s</string>
     <string name="list_is_empty">List is empty</string>
     <string name="connection_error">Connection error</string>
+    <string name="news">news</string>
 
 </resources>

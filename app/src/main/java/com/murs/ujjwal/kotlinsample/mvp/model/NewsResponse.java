@@ -22,23 +22,41 @@
  * SOFTWARE.
  */
 
-package com.murs.ujjwal.kotlinsample.di.component
+package com.murs.ujjwal.kotlinsample.mvp.model;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import com.ktoi.toi.model.NewsItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by Ujjwal on 28/06/17.
+ * example of work of Kotlin project with Java class.
  */
+public class NewsResponse {
 
+    @SerializedName("Pagination")
+    @Expose
+    private Pagination pagination;
+    @SerializedName("NewsItem")
+    @Expose
+    private List<NewsItem> newsItem = new ArrayList<NewsItem>();
 
+    public Pagination getPagination() {
+        return pagination;
+    }
 
-import com.murs.ujjwal.kotlinsample.KotlinApplication
-import com.murs.ujjwal.kotlinsample.di.module.ApplicationModule
-import com.murs.ujjwal.kotlinsample.di.module.MainModule
-import com.murs.ujjwal.kotlinsample.di.module.NewsModule
-import dagger.Component
-import javax.inject.Singleton
+    public void setPagination(Pagination pagination) {
+        this.pagination = pagination;
+    }
 
-@Singleton
-@Component(modules = arrayOf(ApplicationModule::class, MainModule::class, NewsModule::class))
-interface ApplicationComponent {
-    fun inject(application: KotlinApplication)
+    public List<NewsItem> getNewsItem() {
+        return newsItem;
+    }
+
+    public void setNewsItem(List<NewsItem> newsItem) {
+        this.newsItem = newsItem;
+    }
+
 }

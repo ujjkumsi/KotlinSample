@@ -29,13 +29,13 @@ package com.murs.ujjwal.kotlinsample.di.api
  */
 
 
-import com.murs.ujjwal.kotlinsample.mvp.model.NewsResponse
+import com.google.gson.JsonObject
+import io.reactivex.Observable
 import retrofit2.http.GET
-import rx.Observable
 
 interface NewsApiInterface {
 
     @GET("/feeds/newsdefaultfeeds.cms?feedtype=sjson")
-    fun getNews(): Observable<NewsResponse>
+    fun getNews(): Observable<JsonObject>
 
 }

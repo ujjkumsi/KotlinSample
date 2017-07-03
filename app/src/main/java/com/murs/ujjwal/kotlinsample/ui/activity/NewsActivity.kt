@@ -31,12 +31,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.murs.ujjwal.kotlinsample.R
-import kotlinx.android.synthetic.main.activity_news.*
 import com.murs.ujjwal.kotlinsample.data.entity.News
 import com.murs.ujjwal.kotlinsample.di.api.NewsApiInterface
 import com.murs.ujjwal.kotlinsample.mvp.presenter.NewsPresenter
 import com.murs.ujjwal.kotlinsample.mvp.view.NewsPresentation
 import com.murs.ujjwal.kotlinsample.ui.adapter.NewsAdapter
+import kotlinx.android.synthetic.main.activity_news.*
 import dagger.android.AndroidInjection
 import java.io.IOException
 import javax.inject.Inject
@@ -46,7 +46,7 @@ import javax.inject.Inject
  */
 
 
-class NewsActivity: AppCompatActivity(), NewsPresentation, SwipeRefreshLayout.OnRefreshListener {
+class NewsActivity: AppCompatActivity(), NewsPresentation, SwipeRefreshLayout.OnRefreshListener{
 
 
     @Inject
